@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <GUI/SAVCWidget.h>
+#include <Multicast/Receiver.h>
 
 namespace Ui {
 class MainWindow;
@@ -18,6 +19,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Receiver *receiver;
 };
 
 #endif // MAINWINDOW_H

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     GUI/SAVCWidget.cpp \
-    SAVC.cpp
+    SAVC.cpp \
+    Multicast/Receiver.cpp
 
 HEADERS  += mainwindow.h \
     GUI/SAVCWidget.h \
-    SAVC.h
+    SAVC.h \
+    Multicast/Receiver.h
 
 FORMS    += mainwindow.ui
 

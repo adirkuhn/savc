@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     SAVCWidget *savcWidget = new SAVCWidget;
 
+    this->receiver = new Receiver();
+
     ui->setupUi(this);
     this->setWindowTitle("SAVC");
     this->resize(600,400);
@@ -18,10 +20,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //TODO: Fazer Leitura dos dados do simulador
     qDebug() << "TODO: Fazer Leitura dos dados do simulador";
+
+    //connect
+    connect(receiver->udpSocket, SIGNAL(readyRead()),
+            receiver, SLOT(processPendingDatagrams()));
 }
 
 MainWindow::~MainWindow()
 {
+    delete receiver;
     delete ui;
 
 }
