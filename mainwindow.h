@@ -20,6 +20,8 @@ public:
 private:
     Ui::MainWindow *ui;
     Receiver *receiver;
+    SAVCWidget *savcWidget;
+
 };
 
 #endif // MAINWINDOW_H

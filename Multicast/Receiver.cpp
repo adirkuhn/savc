@@ -3,7 +3,7 @@
 
 Receiver::Receiver(QObject *parent): QObject(parent)
 {
-    groupAddress = QHostAddress("127.0.0.1");
+    groupAddress = QHostAddress("179.106.217.203");
 
     qDebug() << "Listening for multicasted messages";
 
@@ -15,11 +15,27 @@ Receiver::Receiver(QObject *parent): QObject(parent)
 
 void Receiver::processPendingDatagrams()
 {
-    while (udpSocket->hasPendingDatagrams()) {
-        QByteArray datagram;
+    QByteArray datagram;
+
+    while (udpSocket->hasPendingDatagrams()) {    
         datagram.resize(udpSocket->pendingDatagramSize());
         udpSocket->readDatagram(datagram.data(), datagram.size());
-
-        qDebug() << QString("Received datagram: \"%1\"").arg(datagram.data());
     }
+
+    //qDebug() << QString("Received datagram: \"%1\"").arg(datagram.data());
+    //qDebug() << this->decodeReceivedData(datagram).keys();
+
+    //decode datagram
+
+    //emit receivedData(this->decodeReceivedData(datagram));
+
+    emit multicastReceivedData(this->decodeReceivedData(datagram));
+}
+
+QJsonObject Receiver::decodeReceivedData(QByteArray receivedData) {
+    QJsonDocument receivedJson;
+
+    receivedJson = receivedJson.fromJson(receivedData);
+
+    return receivedJson.object();
 }

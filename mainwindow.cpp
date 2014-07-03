@@ -1,15 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
 
-    SAVCWidget *savcWidget = new SAVCWidget;
-
     this->receiver = new Receiver();
+    this->savcWidget = new SAVCWidget();
 
     ui->setupUi(this);
     this->setWindowTitle("SAVC");
@@ -22,12 +22,18 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << "TODO: Fazer Leitura dos dados do simulador";
 
     //connect
+    //leitura de pacotes
     connect(receiver->udpSocket, SIGNAL(readyRead()),
             receiver, SLOT(processPendingDatagrams()));
+
+    //atualizacao de dados recebidos
+    connect(receiver, SIGNAL(multicastReceivedData(QJsonObject)),
+            savcWidget, SLOT(savcUpdateData(QJsonObject)));
 }
 
 MainWindow::~MainWindow()
 {
+    delete savcWidget;
     delete receiver;
     delete ui;
 

@@ -3,6 +3,8 @@
 
 #include <QHostAddress>
 #include <QUdpSocket>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 class Receiver: public QObject
 {
@@ -17,6 +19,12 @@ public:
 public slots:
     void processPendingDatagrams();
 
+private:
+    QJsonObject decodeReceivedData(QByteArray receivedData);
+
+signals:
+    //void receivedData(const QJsonObject &);
+    void multicastReceivedData(QJsonObject);
 
 };
 
