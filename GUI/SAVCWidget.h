@@ -38,8 +38,8 @@ private:
     void UpdateTrafos(QJsonObject jsonTrafos);
 
 public:
-    SAVCWidget();
-    ~SAVCWidget();
+    explicit SAVCWidget();
+    virtual ~SAVCWidget();
 
     void setupUi(QWidget *mainWindow);
 
