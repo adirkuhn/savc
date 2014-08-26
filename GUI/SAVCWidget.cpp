@@ -16,19 +16,23 @@ void SAVCWidget::setupUi(QWidget *mainWindow) {
 
 
     //Layout Principal do SAVC
-    QGridLayout *mainLayout = new QGridLayout;
+    //QGridLayout *mainLayout = new QGridLayout;
+    QHBoxLayout *mainLayout = new QHBoxLayout;
 
 
     //Layout de Supervisao
-    QTabWidget *supervisaoTabs = new QTabWidget;
+    QTabWidget *tabs = new QTabWidget;
+
 
     //Add equipamentos
-   supervisaoAddTP(supervisaoTabs);
-   supervisaoAddBreakers(supervisaoTabs);
-   supervisaoAddTrafos(supervisaoTabs);
+   supervisaoAddTP(tabs);
+   //supervisaoAddTrafos(tabs);
+   supervisao(tabs);
 
     //Adiciona tabs no layout principal
-    mainLayout->addWidget(supervisaoTabs, 0, 0);
+    mainLayout->addWidget(tabs);
+
+
     //mainLayout->addWidget(barras,0,1);
 
 
@@ -36,7 +40,23 @@ void SAVCWidget::setupUi(QWidget *mainWindow) {
     mainWindow->setLayout(mainLayout);
 }
 
+void SAVCWidget::supervisao(QTabWidget *mainTab){
+
+    QHBoxLayout *supervisaobox = new QHBoxLayout;
+    QTabWidget *supertab = new QTabWidget;
+
+    supervisaoAddTP(supertab);
+
+    this->tp1Label = new QLabel("Barra 1");
+    supervisaobox->addWidget(tp1Label);
+
+
+}
+
 void SAVCWidget::supervisaoAddTP(QTabWidget *mainTab) {
+
+
+    QTabWidget *tptab = new QTabWidget;
 
     //TP Layout
     QGridLayout *tpMainLayout = new QGridLayout;
@@ -57,13 +77,10 @@ void SAVCWidget::supervisaoAddTP(QTabWidget *mainTab) {
     tpMainLayout->addWidget(tp2Label, 1, 0);
     tpMainLayout->addWidget(tp2LineEdit, 1, 1, 1, 2);
 
-    //add tab
-    tpBox->setLayout(tpMainLayout);
-    mainTab->addTab(tpBox, "Barra");
-}
 
-void SAVCWidget::supervisaoAddBreakers(QTabWidget *mainTab) {
 
+
+    //=====================================================
     //Breaker Layout
     QGroupBox *breakerBox = new QGroupBox;
     QHBoxLayout *breakerLayout = new QHBoxLayout;
@@ -87,11 +104,12 @@ void SAVCWidget::supervisaoAddBreakers(QTabWidget *mainTab) {
 
     //add tab
     breakerBox->setLayout(breakerLayout);
-    mainTab->addTab(breakerBox, "Breakers");
+    //mainTab->addTab(breakerBox, "Breakers");
 
-}
 
-void SAVCWidget::supervisaoAddTrafos(QTabWidget *mainTab) {
+
+    //================================================================
+
 
     //Trafo layout
     QHBoxLayout *trafoLayout = new QHBoxLayout;
@@ -120,8 +138,20 @@ void SAVCWidget::supervisaoAddTrafos(QTabWidget *mainTab) {
     trafoBox->setLayout(trafoLayout);
 
     //add tab
-    mainTab->addTab(trafoBox, "Trafos");
+
+//=======================================================
+
+
+
+    //add tab
+    tpBox->setLayout(tpMainLayout);
+    tptab->addTab(tpBox, "Barra");
+    tptab->addTab(breakerBox, "Breakers");
+    tptab->addTab(trafoBox, "Trafos");
+    mainTab->addTab(tptab, "Supervisão");
 }
+
+
 
 //SLot para atualizacao de dados na tela
 void SAVCWidget::savcUpdateData(QJsonObject receivedData) {

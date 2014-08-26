@@ -48,6 +48,7 @@ public:
     void supervisaoAddTP(QTabWidget *mainTab);
     void supervisaoAddBreakers(QTabWidget *mainTab);
     void supervisaoAddTrafos(QTabWidget *mainTab);
+    void supervisao(QTabWidget *mainTab);
 
 public slots:
     //void savcUpdateData(const QJsonObject &receivedData);

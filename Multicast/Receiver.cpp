@@ -3,7 +3,7 @@
 
 Receiver::Receiver(QObject *parent): QObject(parent)
 {
-    groupAddress = QHostAddress("127.0.0.1");
+    groupAddress = QHostAddress("179.106.217.203");
 
     qDebug() << "Listening for multicasted messages";
 
