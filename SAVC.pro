@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     GUI/SAVCWidget.cpp \
     SAVC.cpp \
-    Multicast/Receiver.cpp
+    Multicast/Receiver.cpp \
+    CPAR.cpp
 
 HEADERS  += mainwindow.h \
     GUI/SAVCWidget.h \
     SAVC.h \
-    Multicast/Receiver.h
+    Multicast/Receiver.h \
+    CPAR.h
 
 FORMS    += mainwindow.ui
 
