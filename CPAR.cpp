@@ -2,7 +2,6 @@
 
 CPAR::CPAR()
 {
-
 }
 
 bool CPAR::verificaTap(){

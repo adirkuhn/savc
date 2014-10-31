@@ -6,7 +6,7 @@ class CPAR
 public:
     CPAR();
 
-    int *grupo;
+    int grupo;
     bool verificaTap();
     bool verificaLoc();
     bool verificaControleConjunto();

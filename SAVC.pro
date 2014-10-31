@@ -23,8 +23,7 @@ SOURCES += main.cpp\
     PIU/BreakerIED.cpp \
     PIU/busied.cpp \
     PIU/switchied.cpp \
-    PIU/TrafoIED.cpp \
-    CPAR.cpp
+    PIU/TrafoIED.cpp
 
 HEADERS  += mainwindow.h \
     GUI/SAVCWidget.h \
@@ -38,8 +37,7 @@ HEADERS  += mainwindow.h \
     PIU/switchied.h \
     PIU/TrafoIED.h \
     PIU/BreakerStatus.h \
-    PIU/switchstatus.h \
-    CPAR.h
+    PIU/switchstatus.h
 
 
 FORMS    += mainwindow.ui
