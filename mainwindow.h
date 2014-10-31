@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <GUI/SAVCWidget.h>
 #include <Multicast/Receiver.h>
+#include <SAVC.h>
 
 namespace Ui {
 class MainWindow;
@@ -21,6 +22,8 @@ private:
     Ui::MainWindow *ui;
     Receiver *receiver;
     SAVCWidget *savcWidget;
+    SAVC *savc;
+    QThread *thread;
 
 };
 

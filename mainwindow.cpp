@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
-    this->receiver = new Receiver();
     this->savcWidget = new SAVCWidget();
+    this->savc = new SAVC();
 
     ui->setupUi(this);
     this->setWindowTitle("SAVC");
@@ -23,18 +23,32 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //connect
     //leitura de pacotes
-    connect(receiver->udpSocket, SIGNAL(readyRead()),
-            receiver, SLOT(processPendingDatagrams()));
+//    connect(receiver->udpSocket, SIGNAL(readyRead()),
+//            receiver, SLOT(processPendingDatagrams()));
 
-    //atualizacao de dados recebidos
-    connect(receiver, SIGNAL(multicastReceivedData(QJsonObject)),
-            savcWidget, SLOT(savcUpdateData(QJsonObject)));
+//    //atualizacao de dados recebidos
+//    connect(receiver, SIGNAL(multicastReceivedData(QJsonObject)),
+//            savcWidget, SLOT(savcUpdateData(QJsonObject)));
+//    connect(receiver, SIGNAL(multicastReceivedData(QJsonObject)),
+//            savc, SLOT(atualizaTensao(QJsonObject)));
+
+    //escutar goose
+
+    this->receiver = new Receiver(this);
+    this->receiver->start();
 }
 
 MainWindow::~MainWindow()
 {
-    delete savcWidget;
-    delete receiver;
-    delete ui;
+    //destroy thread
+//    this->receiver->quit();
+//    this->receiver->wait();
+    this->receiver->terminate();
+    while(!this->receiver->isFinished());
+
+    delete this->savcWidget;
+    delete this->receiver;
+    delete this->savc;
+    delete this->ui;
 
 }

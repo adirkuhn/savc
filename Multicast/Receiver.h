@@ -1,30 +1,21 @@
 #ifndef RECEIVER_H
 #define RECEIVER_H
 
-#include <QHostAddress>
-#include <QUdpSocket>
-#include <QJsonDocument>
-#include <QJsonObject>
+#include <QThread>
+#include <GooseMessage.h>
 
-class Receiver: public QObject
+class Receiver: public QThread
 {
     Q_OBJECT
 
-public:
-    Receiver(QObject *parent=0);
-
-    QUdpSocket *udpSocket;
-    QHostAddress groupAddress;
-
-public slots:
-    void processPendingDatagrams();
-
 private:
-    QJsonObject decodeReceivedData(QByteArray receivedData);
+    Multicast *multicast;
+    static void savcGoosePacketHandle(u_char *args, const pcap_pkthdr *pkthdr, const u_char *packet);
 
-signals:
-    //void receivedData(const QJsonObject &);
-    void multicastReceivedData(QJsonObject);
+public:
+    Receiver(QObject *parent = 0);
+    ~Receiver();
+    void run();
 
 };
 
