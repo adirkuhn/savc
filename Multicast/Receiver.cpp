@@ -27,6 +27,12 @@ void Receiver::run()
     this->multicast->listenMulticast(this->savcGoosePacketHandle, "ether proto 0x88b8 && ether[6:2] == 0x010C");
 }
 
+//seta cilo
+void Receiver::setCilo(CILO *cilo)
+{
+    this->cilo = cilo;
+}
+
 //processa pacotes recebidos da rede
 void Receiver::savcGoosePacketHandle(u_char *args, const pcap_pkthdr *pkthdr, const u_char *packet)
 {

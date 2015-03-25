@@ -24,6 +24,7 @@ private:
     SAVCWidget *savcWidget;
     SAVC *savc;
     QThread *thread;
+    CILO *cilo;
 
 };
 

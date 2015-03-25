@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->savcWidget = new SAVCWidget();
     this->savc = new SAVC();
+    this->cilo = new CILO();
 
     ui->setupUi(this);
     this->setWindowTitle("SAVC");
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //escutar goose
 
     this->receiver = new Receiver(this);
+    this->receiver->setCilo(cilo);
     this->receiver->start();
 }
 

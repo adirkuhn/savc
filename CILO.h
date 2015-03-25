@@ -7,7 +7,7 @@
 class CILO
 {
 public:
-    QMap<QString, BreakerIED> breakers;
+    QMap<QString, BreakerIED*> *breakers;
     CILO();
 };
 
